@@ -7,7 +7,7 @@ const actors = game.actors;
 const wizard = actors.find(actor => actor.system.props.class === "MagicUser");
 
 if (wizard) {
-  let actorPower = wizard.system.props.magicuser_power_max;
+  let actorPower = wizard.system.props.magicuser_power_current;
   let remainingPower = actorPower;
 
   let spellTable = Object.values(wizard.system.props.spells_dynamic_table);
@@ -15,7 +15,7 @@ if (wizard) {
     .filter(spell => spell.spell_list_memorized)
     .map(spell => `<option value="${spell.spell_list_name}">${spell.spell_list_name}</option>`);
 
-  const effectTexts = ["parlor trick", "minor (+1/1d6)", "moderate (+2/2d6)", "major (+3/4d6)", "", "spectacular (+4/6d6)", "", "", "", "legendary (+5/8d6)"];
+  const effectTexts = ["parlor trick", "minor (+1/[[/roll 1d6]])", "moderate (+2/[[/roll 2d6]])", "major (+3/[[/roll 4d6]])", "", "spectacular (+4/[[/roll 6d6]])", "", "", "", "legendary (+5/[[/roll 8d6]])"];
   const rangeTexts = ["touch","close/reach/near","far","within sight","","out of sight","","","","transplanar",];
   const areaTexts = ["self/single target", "a few targets/small area", "group/medium area", "mob/hamlet/large area", "", "throng/village/huge area", "", "", "", "horde/town/vast area"];
   const durationTexts = ["instant","1","3","5","","7","","","","permanent"];
@@ -116,4 +116,3 @@ if (wizard) {
 } else {
   ui.notifications.warn('Actor "Dinglewiz" not found.');
 }
-
